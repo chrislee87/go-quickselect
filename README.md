@@ -1,2 +1,2 @@
 # go-quickselect
-Generic go-quickselect, 10x faster to find top-K elements.
+Generic go-quickselect to find out top-K elements, 10x faster than quicksort!
