@@ -6,6 +6,7 @@ import (
 	"testing"
 )
 
+// go test -v -run="IntSliceQuickSelect"
 func TestIntSliceQuickSelect(t *testing.T) {
 	lesser, greater := func(a, b int) bool { return a < b }, func(a, b int) bool { return a > b }
 
@@ -34,28 +35,31 @@ func TestIntSliceQuickSelect(t *testing.T) {
 		{[]int{3, 2, 3, 1, 2, 4, 5, 5, 6}, []int{4, 5, 5, 6}, 4, greater},
 	}
 
-	for i, test := range testCases {
-		QuickSelect(test.Array, test.K, test.cmp)
+	for i, tc := range testCases {
+		QuickSelect(tc.Array, tc.K, tc.cmp)
 
-		if !ArrayWithSameElements(test.Array[0:test.K], test.ExpectedK) {
-			t.Errorf("[%d], Expected smallest K elements to be '%v', but got '%v'", i, test.Array[0:test.K], test.ExpectedK)
+		if !arrayWithSameElements(tc.Array[0:tc.K], tc.ExpectedK) {
+			t.Errorf("[%d], Expected smallest K elements to be '%v', but got '%v'", i, tc.ExpectedK, tc.Array[0:tc.K])
 		}
 	}
 }
 
-// Bench Quickselect, 10x faster than quicksort
+/*
+ *  go test -bench="BenchmarkQuick"
+ *  Benchmark test, quickselect 10x faster than quicksort
+ */
+
 func BenchmarkQuickSelectSize1e6K1e1(b *testing.B) { cmpQuickselectAndSort(b, 1e6, 1e1, true) }
 func BenchmarkQuickSelectSize1e6K1e2(b *testing.B) { cmpQuickselectAndSort(b, 1e6, 1e2, true) }
 func BenchmarkQuickSelectSize1e6K1e3(b *testing.B) { cmpQuickselectAndSort(b, 1e6, 1e3, true) }
 func BenchmarkQuickSelectSize1e6K1e4(b *testing.B) { cmpQuickselectAndSort(b, 1e6, 1e4, true) }
 func BenchmarkQuickSelectSize1e6K1e5(b *testing.B) { cmpQuickselectAndSort(b, 1e6, 1e5, true) }
 
-// Bench Quicksort
-func BenchmarkSortSize1e6K1e1(b *testing.B) { cmpQuickselectAndSort(b, 1e6, 1e1, false) }
-func BenchmarkSortSize1e6K1e2(b *testing.B) { cmpQuickselectAndSort(b, 1e6, 1e2, false) }
-func BenchmarkSortSize1e6K1e3(b *testing.B) { cmpQuickselectAndSort(b, 1e6, 1e3, false) }
-func BenchmarkSortSize1e6K1e4(b *testing.B) { cmpQuickselectAndSort(b, 1e6, 1e4, false) }
-func BenchmarkSortSize1e6K1e5(b *testing.B) { cmpQuickselectAndSort(b, 1e6, 1e5, false) }
+func BenchmarkQuickSortSize1e6K1e1(b *testing.B) { cmpQuickselectAndSort(b, 1e6, 1e1, false) }
+func BenchmarkQuickSortSize1e6K1e2(b *testing.B) { cmpQuickselectAndSort(b, 1e6, 1e2, false) }
+func BenchmarkQuickSortSize1e6K1e3(b *testing.B) { cmpQuickselectAndSort(b, 1e6, 1e3, false) }
+func BenchmarkQuickSortSize1e6K1e4(b *testing.B) { cmpQuickselectAndSort(b, 1e6, 1e4, false) }
+func BenchmarkQuickSortSize1e6K1e5(b *testing.B) { cmpQuickselectAndSort(b, 1e6, 1e5, false) }
 
 func cmpQuickselectAndSort(b *testing.B, size, k int, quickselect bool) {
 	lesser := func(a, b int) bool { return a < b }

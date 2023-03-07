@@ -1,6 +1,6 @@
 package quickselect
 
-func ArrayWithSameElements[T comparable](array1, array2 []T) bool {
+func arrayWithSameElements[T comparable](array1, array2 []T) bool {
 	elements := make(map[T]int)
 
 	for _, elem1 := range array1 {
