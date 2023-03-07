@@ -48,7 +48,6 @@ func TestIntSliceQuickSelect(t *testing.T) {
  *  go test -bench="BenchmarkQuick"
  *  Benchmark test, quickselect 10x faster than quicksort
  */
-
 func BenchmarkQuickSelectSize1e6K1e1(b *testing.B) { cmpQuickselectAndSort(b, 1e6, 1e1, true) }
 func BenchmarkQuickSelectSize1e6K1e2(b *testing.B) { cmpQuickselectAndSort(b, 1e6, 1e2, true) }
 func BenchmarkQuickSelectSize1e6K1e3(b *testing.B) { cmpQuickselectAndSort(b, 1e6, 1e3, true) }
