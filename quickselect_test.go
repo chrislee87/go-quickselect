@@ -44,7 +44,7 @@ func TestIntSliceQuickSelect(t *testing.T) {
 	}
 }
 
-/*
+/**
  *  go test -bench="BenchmarkQuick"
  *  Benchmark test, quickselect 10x faster than quicksort
  */
